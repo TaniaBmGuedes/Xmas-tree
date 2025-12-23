@@ -46,7 +46,7 @@ if (audio && toggle) {
 if (snowCanvas) {
   const ctx = snowCanvas.getContext("2d");
   const flakes = [];
-  const maxFlakes = 550;
+  const maxFlakes = 120;
 
   const resize = () => {
     snowCanvas.width = window.innerWidth;
@@ -59,9 +59,9 @@ if (snowCanvas) {
     flakes.push({
       x: Math.random() * snowCanvas.width,
       y: Math.random() * snowCanvas.height,
-      r: Math.random() * 2.2 + 0.8, 
-      speedY: Math.random() * 1.8 + 0.4,
-      drift: Math.random() * 0.8 - 0.3,
+      r: Math.random() * 1.8 + 0.6,
+      speedY: Math.random() * 1.2 + 0.35,
+      drift: Math.random() * 0.6 - 0.25,
     });
   }
 
