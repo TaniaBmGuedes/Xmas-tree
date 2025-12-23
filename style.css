@@ -23,8 +23,8 @@ div {
 }
 
 .a3d {
-  --m: calc(.5*(var(--n-stars) - 1));
-  --t: calc(0.33333*var(--n-stars)*0.1s);
+  --m: calc(0.5 * (var(--n-stars) - 1));
+  --t: calc(0.33333 * var(--n-stars) * 0.1s);
   animation: roty 12s linear var(--t) infinite reverse;
 }
 
@@ -37,29 +37,56 @@ div {
 .✴️ {
   --q: Min(1, var(--j));
   --p: calc(1 - var(--q));
-  --s: calc((1.25*var(--p) + var(--q)*var(--sf))*2em);
-  --ay0: calc(var(--i)/var(--n-arms)*1turn);
-  --ay1: calc(var(--ay0) - var(--n-loops)*1turn);
-  --ay: calc((var(--j)/var(--n-stars)*var(--n-loops) + var(--i)/var(--n-arms))*1turn);
-  --tx: calc(var(--q)*var(--rox)*2em);
-  --ty0: calc(var(--m)/var(--n-stars)*20em);
-  --ty1: calc(-1*var(--ty0) - 0.75*2em);
-  --ty: calc((var(--j) - var(--m))/var(--n-stars)*20em + (var(--q)*var(--roy) - var(--p)*0.75)*2em);
-  --tz: calc(var(--j)/var(--n-stars)*10em + var(--q)*var(--roz)*2em);
+  --s: calc((1.25 * var(--p) + var(--q) * var(--sf)) * 2em);
+  --ay0: calc(var(--i) / var(--n-arms) * 1turn);
+  --ay1: calc(var(--ay0) - var(--n-loops) * 1turn);
+  --ay: calc(
+    (var(--j) / var(--n-stars) * var(--n-loops) + var(--i) / var(--n-arms)) *
+      1turn
+  );
+  --tx: calc(var(--q) * var(--rox) * 2em);
+  --ty0: calc(var(--m) / var(--n-stars) * 20em);
+  --ty1: calc(-1 * var(--ty0) - 0.75 * 2em);
+  --ty: calc(
+    (var(--j) - var(--m)) / var(--n-stars) * 20em +
+      (var(--q) * var(--roy) - var(--p) * 0.75) * 2em
+  );
+  --tz: calc(var(--j) / var(--n-stars) * 10em + var(--q) * var(--roz) * 2em);
   grid-area: 1/ 1;
   width: var(--s);
   height: var(--s);
-  --pos: rotatey(var(--ay)) translate3d(var(--tx), var(--ty), var(--tz)) rotatey(calc(-1*var(--ay)));
+  --pos: rotatey(var(--ay)) translate3d(var(--tx), var(--ty), var(--tz))
+    rotatey(calc(-1 * var(--ay)));
   transform: var(--pos);
-  --dt: calc(0.33333*(var(--n-stars) - var(--j))*0.1s);
-  animation: grow calc(var(--q)*0.1s) ease-out var(--dt) backwards, move calc(var(--p)*var(--t)) linear;
+  --dt: calc(0.33333 * (var(--n-stars) - var(--j)) * 0.1s);
+  animation: grow calc(var(--q) * 0.1s) ease-out var(--dt) backwards,
+    move calc(var(--p) * var(--t)) linear;
 }
 
 .✴️::after {
-  opacity: calc(var(--p) + var(--q)*var(--j)/var(--n-stars) + .25);
+  opacity: calc(var(--p) + var(--q) * var(--j) / var(--n-stars) + 0.25);
   background: radial-gradient(#9ae66e 8%, #24c26c 25%, rgba(36, 194, 108, 0.2));
-  clip-path: polygon(50% 0%, 53.53553% 41.46447%, 85.35534% 14.64466%, 58.53553% 46.46447%, 100% 50%, 58.53553% 53.53553%, 85.35534% 85.35534%, 53.53553% 58.53553%, 50% 100%, 46.46447% 58.53553%, 14.64466% 85.35534%, 41.46447% 53.53553%, 0% 50%, 41.46447% 46.46447%, 14.64466% 14.64466%, 46.46447% 41.46447%);
-  animation: roty 12s linear var(--t) infinite, puls calc(var(--p)*.1s) ease-in-out infinite alternate, hue 4s linear var(--dt) infinite;
+  clip-path: polygon(
+    50% 0%,
+    53.53553% 41.46447%,
+    85.35534% 14.64466%,
+    58.53553% 46.46447%,
+    100% 50%,
+    58.53553% 53.53553%,
+    85.35534% 85.35534%,
+    53.53553% 58.53553%,
+    50% 100%,
+    46.46447% 58.53553%,
+    14.64466% 85.35534%,
+    41.46447% 53.53553%,
+    0% 50%,
+    41.46447% 46.46447%,
+    14.64466% 14.64466%,
+    46.46447% 41.46447%
+  );
+  animation: roty 12s linear var(--t) infinite,
+    puls calc(var(--p) * 0.1s) ease-in-out infinite alternate,
+    hue 4s linear var(--dt) infinite;
   content: "";
 }
 
@@ -71,17 +98,19 @@ div {
 
 @keyframes move {
   0% {
-    transform: rotatey(var(--ay0)) translate3d(0, var(--ty0), 10em) rotatey(calc(-1*var(--ay0)));
+    transform: rotatey(var(--ay0)) translate3d(0, var(--ty0), 10em)
+      rotatey(calc(-1 * var(--ay0)));
   }
 
   100% {
-    transform: rotatey(var(--ay1)) translate3d(0, var(--ty1), 0) rotatey(calc(-1*var(--ay1)));
+    transform: rotatey(var(--ay1)) translate3d(0, var(--ty1), 0)
+      rotatey(calc(-1 * var(--ay1)));
   }
 }
 
 @keyframes puls {
   to {
-    scale: .2;
+    scale: 0.2;
     opacity: 0.2;
   }
 }
@@ -92,413 +121,412 @@ div {
   }
 }
 
-
 .✴️:nth-child(n + 1) {
-  --i: 0
+  --i: 0;
 }
 
 .✴️:nth-child(n + 101) {
-  --i: 1
+  --i: 1;
 }
 
 .✴️:nth-child(100n + 1) {
-  --j: 0
+  --j: 0;
 }
 
 .✴️:nth-child(100n + 2) {
-  --j: 1
+  --j: 1;
 }
 
 .✴️:nth-child(100n + 3) {
-  --j: 2
+  --j: 2;
 }
 
 .✴️:nth-child(100n + 4) {
-  --j: 3
+  --j: 3;
 }
 
 .✴️:nth-child(100n + 5) {
-  --j: 4
+  --j: 4;
 }
 
 .✴️:nth-child(100n + 6) {
-  --j: 5
+  --j: 5;
 }
 
 .✴️:nth-child(100n + 7) {
-  --j: 6
+  --j: 6;
 }
 
 .✴️:nth-child(100n + 8) {
-  --j: 7
+  --j: 7;
 }
 
 .✴️:nth-child(100n + 9) {
-  --j: 8
+  --j: 8;
 }
 
 .✴️:nth-child(100n + 10) {
-  --j: 9
+  --j: 9;
 }
 
 .✴️:nth-child(100n + 11) {
-  --j: 10
+  --j: 10;
 }
 
 .✴️:nth-child(100n + 12) {
-  --j: 11
+  --j: 11;
 }
 
 .✴️:nth-child(100n + 13) {
-  --j: 12
+  --j: 12;
 }
 
 .✴️:nth-child(100n + 14) {
-  --j: 13
+  --j: 13;
 }
 
 .✴️:nth-child(100n + 15) {
-  --j: 14
+  --j: 14;
 }
 
 .✴️:nth-child(100n + 16) {
-  --j: 15
+  --j: 15;
 }
 
 .✴️:nth-child(100n + 17) {
-  --j: 16
+  --j: 16;
 }
 
 .✴️:nth-child(100n + 18) {
-  --j: 17
+  --j: 17;
 }
 
 .✴️:nth-child(100n + 19) {
-  --j: 18
+  --j: 18;
 }
 
 .✴️:nth-child(100n + 20) {
-  --j: 19
+  --j: 19;
 }
 
 .✴️:nth-child(100n + 21) {
-  --j: 20
+  --j: 20;
 }
 
 .✴️:nth-child(100n + 22) {
-  --j: 21
+  --j: 21;
 }
 
 .✴️:nth-child(100n + 23) {
-  --j: 22
+  --j: 22;
 }
 
 .✴️:nth-child(100n + 24) {
-  --j: 23
+  --j: 23;
 }
 
 .✴️:nth-child(100n + 25) {
-  --j: 24
+  --j: 24;
 }
 
 .✴️:nth-child(100n + 26) {
-  --j: 25
+  --j: 25;
 }
 
 .✴️:nth-child(100n + 27) {
-  --j: 26
+  --j: 26;
 }
 
 .✴️:nth-child(100n + 28) {
-  --j: 27
+  --j: 27;
 }
 
 .✴️:nth-child(100n + 29) {
-  --j: 28
+  --j: 28;
 }
 
 .✴️:nth-child(100n + 30) {
-  --j: 29
+  --j: 29;
 }
 
 .✴️:nth-child(100n + 31) {
-  --j: 30
+  --j: 30;
 }
 
 .✴️:nth-child(100n + 32) {
-  --j: 31
+  --j: 31;
 }
 
 .✴️:nth-child(100n + 33) {
-  --j: 32
+  --j: 32;
 }
 
 .✴️:nth-child(100n + 34) {
-  --j: 33
+  --j: 33;
 }
 
 .✴️:nth-child(100n + 35) {
-  --j: 34
+  --j: 34;
 }
 
 .✴️:nth-child(100n + 36) {
-  --j: 35
+  --j: 35;
 }
 
 .✴️:nth-child(100n + 37) {
-  --j: 36
+  --j: 36;
 }
 
 .✴️:nth-child(100n + 38) {
-  --j: 37
+  --j: 37;
 }
 
 .✴️:nth-child(100n + 39) {
-  --j: 38
+  --j: 38;
 }
 
 .✴️:nth-child(100n + 40) {
-  --j: 39
+  --j: 39;
 }
 
 .✴️:nth-child(100n + 41) {
-  --j: 40
+  --j: 40;
 }
 
 .✴️:nth-child(100n + 42) {
-  --j: 41
+  --j: 41;
 }
 
 .✴️:nth-child(100n + 43) {
-  --j: 42
+  --j: 42;
 }
 
 .✴️:nth-child(100n + 44) {
-  --j: 43
+  --j: 43;
 }
 
 .✴️:nth-child(100n + 45) {
-  --j: 44
+  --j: 44;
 }
 
 .✴️:nth-child(100n + 46) {
-  --j: 45
+  --j: 45;
 }
 
 .✴️:nth-child(100n + 47) {
-  --j: 46
+  --j: 46;
 }
 
 .✴️:nth-child(100n + 48) {
-  --j: 47
+  --j: 47;
 }
 
 .✴️:nth-child(100n + 49) {
-  --j: 48
+  --j: 48;
 }
 
 .✴️:nth-child(100n + 50) {
-  --j: 49
+  --j: 49;
 }
 
 .✴️:nth-child(100n + 51) {
-  --j: 50
+  --j: 50;
 }
 
 .✴️:nth-child(100n + 52) {
-  --j: 51
+  --j: 51;
 }
 
 .✴️:nth-child(100n + 53) {
-  --j: 52
+  --j: 52;
 }
 
 .✴️:nth-child(100n + 54) {
-  --j: 53
+  --j: 53;
 }
 
 .✴️:nth-child(100n + 55) {
-  --j: 54
+  --j: 54;
 }
 
 .✴️:nth-child(100n + 56) {
-  --j: 55
+  --j: 55;
 }
 
 .✴️:nth-child(100n + 57) {
-  --j: 56
+  --j: 56;
 }
 
 .✴️:nth-child(100n + 58) {
-  --j: 57
+  --j: 57;
 }
 
 .✴️:nth-child(100n + 59) {
-  --j: 58
+  --j: 58;
 }
 
 .✴️:nth-child(100n + 60) {
-  --j: 59
+  --j: 59;
 }
 
 .✴️:nth-child(100n + 61) {
-  --j: 60
+  --j: 60;
 }
 
 .✴️:nth-child(100n + 62) {
-  --j: 61
+  --j: 61;
 }
 
 .✴️:nth-child(100n + 63) {
-  --j: 62
+  --j: 62;
 }
 
 .✴️:nth-child(100n + 64) {
-  --j: 63
+  --j: 63;
 }
 
 .✴️:nth-child(100n + 65) {
-  --j: 64
+  --j: 64;
 }
 
 .✴️:nth-child(100n + 66) {
-  --j: 65
+  --j: 65;
 }
 
 .✴️:nth-child(100n + 67) {
-  --j: 66
+  --j: 66;
 }
 
 .✴️:nth-child(100n + 68) {
-  --j: 67
+  --j: 67;
 }
 
 .✴️:nth-child(100n + 69) {
-  --j: 68
+  --j: 68;
 }
 
 .✴️:nth-child(100n + 70) {
-  --j: 69
+  --j: 69;
 }
 
 .✴️:nth-child(100n + 71) {
-  --j: 70
+  --j: 70;
 }
 
 .✴️:nth-child(100n + 72) {
-  --j: 71
+  --j: 71;
 }
 
 .✴️:nth-child(100n + 73) {
-  --j: 72
+  --j: 72;
 }
 
 .✴️:nth-child(100n + 74) {
-  --j: 73
+  --j: 73;
 }
 
 .✴️:nth-child(100n + 75) {
-  --j: 74
+  --j: 74;
 }
 
 .✴️:nth-child(100n + 76) {
-  --j: 75
+  --j: 75;
 }
 
 .✴️:nth-child(100n + 77) {
-  --j: 76
+  --j: 76;
 }
 
 .✴️:nth-child(100n + 78) {
-  --j: 77
+  --j: 77;
 }
 
 .✴️:nth-child(100n + 79) {
-  --j: 78
+  --j: 78;
 }
 
 .✴️:nth-child(100n + 80) {
-  --j: 79
+  --j: 79;
 }
 
 .✴️:nth-child(100n + 81) {
-  --j: 80
+  --j: 80;
 }
 
 .✴️:nth-child(100n + 82) {
-  --j: 81
+  --j: 81;
 }
 
 .✴️:nth-child(100n + 83) {
-  --j: 82
+  --j: 82;
 }
 
 .✴️:nth-child(100n + 84) {
-  --j: 83
+  --j: 83;
 }
 
 .✴️:nth-child(100n + 85) {
-  --j: 84
+  --j: 84;
 }
 
 .✴️:nth-child(100n + 86) {
-  --j: 85
+  --j: 85;
 }
 
 .✴️:nth-child(100n + 87) {
-  --j: 86
+  --j: 86;
 }
 
 .✴️:nth-child(100n + 88) {
-  --j: 87
+  --j: 87;
 }
 
 .✴️:nth-child(100n + 89) {
-  --j: 88
+  --j: 88;
 }
 
 .✴️:nth-child(100n + 90) {
-  --j: 89
+  --j: 89;
 }
 
 .✴️:nth-child(100n + 91) {
-  --j: 90
+  --j: 90;
 }
 
 .✴️:nth-child(100n + 92) {
-  --j: 91
+  --j: 91;
 }
 
 .✴️:nth-child(100n + 93) {
-  --j: 92
+  --j: 92;
 }
 
 .✴️:nth-child(100n + 94) {
-  --j: 93
+  --j: 93;
 }
 
 .✴️:nth-child(100n + 95) {
-  --j: 94
+  --j: 94;
 }
 
 .✴️:nth-child(100n + 96) {
-  --j: 95
+  --j: 95;
 }
 
 .✴️:nth-child(100n + 97) {
-  --j: 96
+  --j: 96;
 }
 
 .✴️:nth-child(100n + 98) {
-  --j: 97
+  --j: 97;
 }
 
 .✴️:nth-child(100n + 99) {
-  --j: 98
+  --j: 98;
 }
 
 .✴️:nth-child(100n + 100) {
-  --j: 99
+  --j: 99;
 }
 
 .greeting {
@@ -514,9 +542,7 @@ div {
   letter-spacing: 0.08em;
   font-family: "Trebuchet MS", "Comic Sans MS", cursive;
   background: rgba(0, 0, 20, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 1.5em 3.5em rgba(0, 0, 0, 0.5);
-  border-radius: 2em;
+
   backdrop-filter: blur(6px);
   pointer-events: none;
   user-select: none;
@@ -565,12 +591,17 @@ div {
   padding: 0.85em 1.4em;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: linear-gradient(135deg, rgba(255, 47, 75, 0.9), rgba(255, 209, 102, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 47, 75, 0.9),
+    rgba(255, 209, 102, 0.9)
+  );
   color: #0a0a1a;
   font-weight: 800;
   letter-spacing: 0.05em;
   font-size: 0.95rem;
-  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6), 0 0.4em 1.1em rgba(255, 209, 102, 0.35);
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6),
+    0 0.4em 1.1em rgba(255, 209, 102, 0.35);
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
@@ -579,7 +610,8 @@ div {
 
 .sound-toggle:hover {
   transform: translateY(-2px);
-  box-shadow: 0 1.4em 2.8em rgba(0, 0, 0, 0.65), 0 0.5em 1.3em rgba(255, 209, 102, 0.45);
+  box-shadow: 0 1.4em 2.8em rgba(0, 0, 0, 0.65),
+    0 0.5em 1.3em rgba(255, 209, 102, 0.45);
 }
 
 .sound-toggle:active {
@@ -592,8 +624,13 @@ div {
 }
 
 .sound-toggle[aria-pressed="true"] {
-  background: linear-gradient(135deg, rgba(36, 194, 108, 0.9), rgba(154, 230, 110, 0.9));
-  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6), 0 0.4em 1.1em rgba(36, 194, 108, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(36, 194, 108, 0.9),
+    rgba(154, 230, 110, 0.9)
+  );
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6),
+    0 0.4em 1.1em rgba(36, 194, 108, 0.4);
 }
 
 @media (max-width: 600px) {
@@ -601,4 +638,11 @@ div {
     font-size: 0.85rem;
     padding: 0.75em 1.2em;
   }
+}
+
+#snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }

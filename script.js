@@ -1,5 +1,6 @@
 const audio = document.getElementById("bg-audio");
 const toggle = document.getElementById("sound-toggle");
+const snowCanvas = document.getElementById("snow");
 
 if (audio && toggle) {
   audio.preload = "auto";
@@ -40,4 +41,45 @@ if (audio && toggle) {
 
   audio.addEventListener("play", () => setState(true));
   audio.addEventListener("pause", () => setState(false));
+}
+
+if (snowCanvas) {
+  const ctx = snowCanvas.getContext("2d");
+  const flakes = [];
+  const maxFlakes = 550;
+
+  const resize = () => {
+    snowCanvas.width = window.innerWidth;
+    snowCanvas.height = window.innerHeight;
+  };
+  window.addEventListener("resize", resize);
+  resize();
+
+  for (let i = 0; i < maxFlakes; i++) {
+    flakes.push({
+      x: Math.random() * snowCanvas.width,
+      y: Math.random() * snowCanvas.height,
+      r: Math.random() * 2.2 + 0.8, 
+      speedY: Math.random() * 1.8 + 0.4,
+      drift: Math.random() * 0.8 - 0.3,
+    });
+  }
+
+  const tick = () => {
+    ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.beginPath();
+    flakes.forEach((f) => {
+      f.y += f.speedY;
+      f.x += f.drift;
+      if (f.y > snowCanvas.height) f.y = -5;
+      if (f.x > snowCanvas.width) f.x = 0;
+      if (f.x < 0) f.x = snowCanvas.width;
+      ctx.moveTo(f.x, f.y);
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    });
+    ctx.fill();
+    requestAnimationFrame(tick);
+  };
+  tick();
 }
