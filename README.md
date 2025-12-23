@@ -12,9 +12,9 @@ A single-page, animated Christmas tree scene with neon stars, falling snow, and 
 ## Quick start
 1) Serve the folder (avoids audio autoplay restrictions):
 ```sh
-python -m http.server 45023
+npx serve .
 ```
-2) Open http://localhost:45023 in your browser.
+2) Open the printed local URL (e.g., http://localhost:3000).
 
 ## Controls
 - Play music: top-right button; first tap anywhere will also start playback (browser requirement).
