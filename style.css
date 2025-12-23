@@ -5,6 +5,10 @@ div {
   display: grid;
 }
 
+audio {
+  display: none;
+}
+
 body {
   place-content: center;
   overflow-x: hidden;
@@ -520,10 +524,10 @@ div {
 
 .greeting span {
   display: inline-block;
-  background: linear-gradient(120deg, #ff4d6d, #ffd166, #22d1ee);
+  background: linear-gradient(135deg, #ff2f4b 0%, #ffd166 50%, #ffffff 100%);
   -webkit-background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.6));
+  filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.7));
   animation: dance 1.3s ease-in-out infinite;
   animation-delay: calc(var(--i) * 0.08s);
 }
@@ -551,5 +555,50 @@ div {
 
   100% {
     transform: translateY(0) rotate(2deg) scale(1);
+  }
+}
+
+.sound-toggle {
+  position: fixed;
+  right: clamp(1rem, 6vw, 3rem);
+  top: clamp(1rem, 6vh, 3rem);
+  padding: 0.85em 1.4em;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(255, 47, 75, 0.9), rgba(255, 209, 102, 0.9));
+  color: #0a0a1a;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6), 0 0.4em 1.1em rgba(255, 209, 102, 0.35);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  z-index: 10;
+}
+
+.sound-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1.4em 2.8em rgba(0, 0, 0, 0.65), 0 0.5em 1.3em rgba(255, 209, 102, 0.45);
+}
+
+.sound-toggle:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.sound-toggle:focus-visible {
+  outline: 2px solid rgba(255, 209, 102, 0.7);
+  outline-offset: 3px;
+}
+
+.sound-toggle[aria-pressed="true"] {
+  background: linear-gradient(135deg, rgba(36, 194, 108, 0.9), rgba(154, 230, 110, 0.9));
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6), 0 0.4em 1.1em rgba(36, 194, 108, 0.4);
+}
+
+@media (max-width: 600px) {
+  .sound-toggle {
+    font-size: 0.85rem;
+    padding: 0.75em 1.2em;
   }
 }
