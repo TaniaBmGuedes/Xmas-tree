@@ -3,14 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000b33'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle'%3E🎄%3C/text%3E%3Ccircle cx='32' cy='12' r='5' fill='%23ffd166'/%3E%3C/svg%3E"
-    />
+
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="aurora" id="aurora" aria-hidden="true"></div>
     <canvas id="snow"></canvas>
     <div class="a3d" style="--n-arms: 2; --n-stars: 80; --n-loops: 4">
       <div
@@ -833,8 +830,30 @@
       <span style="--i: 14">!</span>
     </div>
 
-    <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false">Play music</button>
-    <audio id="bg-audio" src="assets/audio/christmas-jazz-christmas-holiday-347485.mp3" preload="auto" loop></audio>
+    <div class="controls">
+      <button
+        class="aurora-toggle"
+        id="aurora-toggle"
+        type="button"
+        aria-pressed="true"
+      >
+        Aurora on
+      </button>
+      <button
+        class="sound-toggle"
+        id="sound-toggle"
+        type="button"
+        aria-pressed="false"
+      >
+        Play music
+      </button>
+    </div>
+    <audio
+      id="bg-audio"
+      src="assets/audio/christmas-jazz-christmas-holiday-347485.mp3"
+      preload="auto"
+      loop
+    ></audio>
 
     <script src="./script.js"></script>
   </body>

@@ -39,6 +39,56 @@ body {
   width: 100vw;
   perspective: 35em;
   background: #000014;
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(45px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.aurora.is-on {
+  opacity: 1;
+}
+
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(
+      circle at 32% 42%,
+      rgba(0, 255, 209, 0.35),
+      transparent 46%
+    ),
+    radial-gradient(circle at 74% 58%, rgba(92, 150, 255, 0.3), transparent 50%);
+  animation: drift 42s ease-in-out infinite alternate;
+}
+
+.aurora::after {
+  background: radial-gradient(
+      circle at 40% 68%,
+      rgba(255, 190, 92, 0.25),
+      transparent 45%
+    ),
+    radial-gradient(circle at 62% 32%, rgba(173, 92, 255, 0.32), transparent 50%);
+  animation-duration: 56s;
+  animation-delay: -9s;
+}
+
+.controls {
+  position: fixed;
+  top: clamp(0.8rem, 4vh, 2rem);
+  right: clamp(0.8rem, 5vw, 2rem);
+  display: grid;
+  gap: 0.7rem;
+  z-index: 10;
 }
 
 div {
@@ -55,6 +105,20 @@ div {
 @keyframes roty {
   to {
     rotate: y 1turn;
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(3%, 4%, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(-2%, 6%, 0) scale(1.04);
   }
 }
 
@@ -610,10 +674,20 @@ div {
   letter-spacing: 0.08em;
   font-family: "Trebuchet MS", "Comic Sans MS", cursive;
   background: rgba(0, 0, 20, 0.45);
-
   backdrop-filter: blur(6px);
   pointer-events: none;
   user-select: none;
+}
+
+.aurora-on .greeting {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 198, 255, 0.28),
+    rgba(92, 255, 209, 0.24),
+    rgba(92, 150, 255, 0.28)
+  );
+  box-shadow: 0 0.75em 2.2em rgba(0, 0, 0, 0.5),
+    0 0.35em 1.1em rgba(92, 150, 255, 0.35);
 }
 
 .greeting span {
@@ -652,41 +726,55 @@ div {
   }
 }
 
-.sound-toggle {
-  position: fixed;
-  right: clamp(1rem, 6vw, 3rem);
-  top: clamp(1rem, 6vh, 3rem);
+.sound-toggle,
+.aurora-toggle {
   padding: 0.85em 1.4em;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 47, 75, 0.9),
-    rgba(255, 209, 102, 0.9)
-  );
   color: #0a0a1a;
   font-weight: 800;
   letter-spacing: 0.05em;
   font-size: 0.95rem;
-  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6),
-    0 0.4em 1.1em rgba(255, 209, 102, 0.35);
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6);
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
   z-index: 10;
 }
 
-.sound-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 1.4em 2.8em rgba(0, 0, 0, 0.65),
-    0 0.5em 1.3em rgba(255, 209, 102, 0.45);
+.sound-toggle {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 47, 75, 0.9),
+    rgba(255, 209, 102, 0.9)
+  );
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6),
+    0 0.4em 1.1em rgba(255, 209, 102, 0.35);
 }
 
-.sound-toggle:active {
+.aurora-toggle {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 198, 255, 0.85),
+    rgba(92, 255, 209, 0.85)
+  );
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6),
+    0 0.4em 1.1em rgba(92, 255, 209, 0.35);
+}
+
+.sound-toggle:hover,
+.aurora-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1.4em 2.8em rgba(0, 0, 0, 0.65);
+}
+
+.sound-toggle:active,
+.aurora-toggle:active {
   transform: translateY(1px) scale(0.99);
 }
 
-.sound-toggle:focus-visible {
+.sound-toggle:focus-visible,
+.aurora-toggle:focus-visible {
   outline: 2px solid rgba(255, 209, 102, 0.7);
   outline-offset: 3px;
 }
@@ -701,8 +789,19 @@ div {
     0 0.4em 1.1em rgba(36, 194, 108, 0.4);
 }
 
+.aurora-toggle[aria-pressed="true"] {
+  background: linear-gradient(
+    135deg,
+    rgba(147, 112, 255, 0.9),
+    rgba(92, 150, 255, 0.9)
+  );
+  box-shadow: 0 1em 2.4em rgba(0, 0, 0, 0.6),
+    0 0.4em 1.1em rgba(92, 150, 255, 0.45);
+}
+
 @media (max-width: 600px) {
-  .sound-toggle {
+  .sound-toggle,
+  .aurora-toggle {
     font-size: 1rem;
     padding: 0.9em 1.4em;
     letter-spacing: 0.06em;
@@ -722,9 +821,8 @@ div {
     letter-spacing: 0.05em;
   }
 
-  .sound-toggle {
-    top: clamp(0.8rem, 4vh, 2rem);
-    right: clamp(0.8rem, 5vw, 2rem);
+  .sound-toggle,
+  .aurora-toggle {
     font-size: 1rem;
     padding: 0.9em 1.45em;
   }

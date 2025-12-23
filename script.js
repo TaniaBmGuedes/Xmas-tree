@@ -1,6 +1,8 @@
 const audio = document.getElementById("bg-audio");
 const toggle = document.getElementById("sound-toggle");
 const snowCanvas = document.getElementById("snow");
+const aurora = document.getElementById("aurora");
+const auroraToggle = document.getElementById("aurora-toggle");
 
 if (audio && toggle) {
   audio.preload = "auto";
@@ -41,6 +43,24 @@ if (audio && toggle) {
 
   audio.addEventListener("play", () => setState(true));
   audio.addEventListener("pause", () => setState(false));
+}
+
+if (aurora && auroraToggle) {
+  let isAuroraOn = true;
+
+  const setAurora = (next) => {
+    aurora.classList.toggle("is-on", next);
+    auroraToggle.textContent = next ? "Aurora on" : "Aurora off";
+    auroraToggle.setAttribute("aria-pressed", next ? "true" : "false");
+    document.body.classList.toggle("aurora-on", next);
+  };
+
+  setAurora(isAuroraOn);
+
+  auroraToggle.addEventListener("click", () => {
+    isAuroraOn = !isAuroraOn;
+    setAurora(isAuroraOn);
+  });
 }
 
 if (snowCanvas) {
