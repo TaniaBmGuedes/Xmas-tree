@@ -84,11 +84,14 @@ body {
 
 .controls {
   position: fixed;
-  top: clamp(0.8rem, 4vh, 2rem);
-  right: clamp(0.8rem, 5vw, 2rem);
+  top: calc(max(env(safe-area-inset-top, 0px), 0.6rem) + 0.4rem);
+  right: calc(max(env(safe-area-inset-right, 0px), 0.6rem) + 0.4rem);
   display: grid;
   gap: 0.7rem;
-  z-index: 10;
+  z-index: 30;
+  pointer-events: auto;
+  transform: translateZ(0);
+  isolation: isolate;
 }
 
 div {
@@ -739,7 +742,8 @@ div {
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-  z-index: 10;
+  z-index: 1;
+  touch-action: manipulation;
 }
 
 .sound-toggle {
@@ -810,14 +814,14 @@ div {
 
 @media (max-width: 700px) {
   :root {
-    --scene-scale: 1.5;
-    --scene-translate-y: -6vh;
+    --scene-scale: 1.25;
+    --scene-translate-y: -4vh;
   }
 
   .greeting {
     font-size: clamp(1.35rem, 1.15rem + 2vw, 2.4rem);
     padding: 0.35em 0.85em;
-    bottom: 8vh;
+    bottom: 16vh;
     letter-spacing: 0.05em;
   }
 
@@ -826,12 +830,28 @@ div {
     font-size: 1rem;
     padding: 0.9em 1.45em;
   }
+
+  .controls {
+    top: calc(max(env(safe-area-inset-top, 0px), 0.5rem) + 0.5rem);
+    right: calc(max(env(safe-area-inset-right, 0px), 0.5rem) + 0.5rem);
+    gap: 0.55rem;
+  }
 }
 
 @media (max-width: 500px) {
   :root {
-    --scene-scale: 1.35;
-    --scene-translate-y: -4vh;
+    --scene-scale: 1.15;
+    --scene-translate-y: -3vh;
+  }
+
+  .greeting {
+    bottom: 18vh;
+  }
+
+  .controls {
+    top: calc(max(env(safe-area-inset-top, 0px), 0.45rem) + 0.55rem);
+    right: calc(max(env(safe-area-inset-right, 0px), 0.45rem) + 0.55rem);
+    gap: 0.45rem;
   }
 }
 
