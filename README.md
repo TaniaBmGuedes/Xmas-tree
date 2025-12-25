@@ -8,6 +8,7 @@ A single-page, animated Christmas tree scene with neon stars, falling snow, and 
 - Falling snow rendered on canvas
 - Play/Pause music toggle (loops `assets/audio/christmas-jazz-christmas-holiday-347485.mp3`)
 - Optional aurora backdrop toggle (on/off)
+- Greeting picker with multiple languages
 - Mobile tweaks for smaller viewport scaling
 
 ## Quick start
@@ -20,6 +21,7 @@ npx serve .
 ## Controls
 - Play music: top-right button; first tap anywhere will also start playback (browser requirement).
 - Aurora: top-left button toggles aurora background on/off.
+- Greeting: dropdown to swap between preset holiday greetings.
 
 ## Customization
 - Number of stars/arms/loops: edit `--n-stars`, `--n-arms`, `--n-loops` on `.a3d` in `index.html`.

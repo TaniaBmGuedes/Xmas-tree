@@ -3,6 +3,9 @@ const toggle = document.getElementById("sound-toggle");
 const snowCanvas = document.getElementById("snow");
 const aurora = document.getElementById("aurora");
 const auroraToggle = document.getElementById("aurora-toggle");
+const greetingEl = document.querySelector(".greeting");
+const greetingPicker = document.getElementById("greeting-picker");
+const stars = Array.from(document.querySelectorAll(".✴️"));
 
 if (audio && toggle) {
   audio.preload = "auto";
@@ -61,6 +64,67 @@ if (aurora && auroraToggle) {
     isAuroraOn = !isAuroraOn;
     setAurora(isAuroraOn);
   });
+}
+
+const renderGreeting = (text) => {
+  if (!greetingEl) return;
+  greetingEl.innerHTML = "";
+  greetingEl.setAttribute("aria-label", text);
+
+  let letterIndex = 0;
+  text.split("").forEach((ch) => {
+    if (ch === " ") {
+      const gap = document.createElement("span");
+      gap.className = "gap";
+      greetingEl.appendChild(gap);
+      return;
+    }
+    const span = document.createElement("span");
+    span.textContent = ch;
+    span.style.setProperty("--i", letterIndex);
+    greetingEl.appendChild(span);
+    letterIndex += 1;
+  });
+};
+
+if (greetingEl) {
+  const savedChoice = localStorage.getItem("greeting-choice");
+  const initialChoice =
+    (savedChoice && savedChoice.length > 0) || savedChoice === ""
+      ? savedChoice
+      : greetingPicker?.value || greetingEl.textContent.trim();
+
+  if (greetingPicker && savedChoice) {
+    greetingPicker.value = savedChoice;
+  }
+
+  renderGreeting(initialChoice || "Merry Christmas!");
+
+  if (greetingPicker) {
+    greetingPicker.addEventListener("change", (event) => {
+      const value = event.target.value;
+      renderGreeting(value);
+      localStorage.setItem("greeting-choice", value);
+    });
+  }
+}
+
+if (stars.length) {
+  const twinkleBatch = Math.min(12, Math.max(6, Math.floor(stars.length * 0.12)));
+  let activeTwinkles = [];
+
+  const applyTwinkle = () => {
+    activeTwinkles.forEach((el) => el.classList.remove("star-twinkle"));
+    const shuffled = [...stars].sort(() => Math.random() - 0.5);
+    activeTwinkles = shuffled.slice(0, twinkleBatch);
+    activeTwinkles.forEach((el, idx) => {
+      el.style.setProperty("--twinkle-delay", `${idx * 0.07}s`);
+      el.classList.add("star-twinkle");
+    });
+  };
+
+  applyTwinkle();
+  setInterval(applyTwinkle, 2100);
 }
 
 if (snowCanvas) {
